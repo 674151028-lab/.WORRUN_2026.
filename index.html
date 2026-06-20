@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WORRUN FUN TOGETHER 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chonburi&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #0047a3;
+            --primary-gradient: linear-gradient(135deg, #0056c6 0%, #003375 100%);
+            --accent-gradient: linear-gradient(135deg, #ffe58f 0%, #d4af37 50%, #b38f19 100%);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 12px 32px rgba(0, 40, 94, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'TH Sarabun New', 'Sarabun', sans-serif;
+        }
+
+        body {
+            /* รูปที่ 1: พื้นหลังหลักสำหรับจอคอมพิวเตอร์ (Desktop) */
+            background-image: url('พื้นหลัง.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* กล่องใหญ่สไตล์กระจกฝ้าโปร่งแสง */
+        .container {
+            width: 100%;
+            max-width: 1150px;
+            background: rgba(255, 255, 255, 0.55); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            /* ระยะเยื้องหลบโลโก้ของจอคอมพิวเตอร์ */
+            margin-top: 360px;
+            margin-bottom: 50px;
+        }
+
+        /* ตกแต่งข้อความหัวข้อ */
+        .web-title {
+            color: var(--primary-color);
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+
+        /* ส่วนควบคุมและกรอกข้อมูล */
+        .control-panel {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 260px;
+            max-width: 500px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #222;
+            border: 1px solid rgba(0, 71, 163, 0.2);
+            border-radius: 8px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.85);
+            transition: all 0.25s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0047a3;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 71, 163, 0.15);
+        }
+
+        /* ตกแต่งปุ่มกด */
+        .btn {
+            padding: 12px 25px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-generate {
+            background: var(--primary-gradient);
+            color: #ffffff;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 71, 163, 0.25);
+            filter: brightness(1.05);
+        }
+
+        .btn-download {
+            background: var(--accent-gradient);
+            color: #1a1a1a;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.35);
+            filter: brightness(1.03);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* ส่วนแสดงผลเกียรติบัตร */
+        .certificate-wrapper {
+            width: 100%;
+            overflow: hidden; 
+            background: transparent;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ขนาดเกียรติบัตรต้นฉบับ 1600x1131 */
+        #certificate-container {
+            position: relative;
+            width: 1600px;
+            height: 1131px;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: var(--shadow-lg);
+            border-radius: 6px;
+            transform-origin: top center;
+            flex-shrink: 0;
+        }
+
+        /* กรอบพื้นที่แสดงชื่อ */
+        .name-container {
+            position: absolute;
+            top: 410px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        /* ชื่อสกุลฟอนต์ Chonburi */
+        #cert-name {
+            font-family: 'Chonburi', serif;
+            font-size: 60px;
+            font-weight: normal;
+            color: #0047a3;
+            text-align: center;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        /* ======================================================= */
+        /* Responsive สำหรับ iPad / แท็บเล็ต และมือถือ (ปรับขยับลงมาเพิ่ม) */
+        /* ======================================================= */
+        @media (max-width: 992px) {
+            body {
+                background-image: url('พื้นหลัง.2.png');
+                background-attachment: scroll;
+            }
+            .container {
+                /* ปรับลงมาจากเดิม 240px เป็น 320px เพื่อหลบโลโก้ข้อความบน iPad */
+                margin-top: 320px;
+                padding: 25px 15px;
+            }
+            .web-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                /* ปรับลงมาจากเดิม 160px เป็น 270px ทำให้ไม่บังแถวอักษรสีทองบนมือถือ */
+                margin-top: 270px;
+                padding: 20px 10px;
+            }
+            .web-title {
+                font-size: 1.5rem;
+            }
+            input[type="text"], .btn {
+                font-size: 1.1rem;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="web-title">THANK YOU FOR PARTICIPATING IN THE ACTIVITY</h1>
+
+        <div class="control-panel">
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="พิมพ์ชื่อ - นามสกุลของคุณที่นี่..." autocomplete="off">
+            </div>
+            <button class="btn btn-generate" id="btnGenerate">สร้างเกียรติบัตร</button>
+            <button class="btn btn-download" id="btnDownload">ดาวน์โหลดเกียรติบัตร</button>
+        </div>
+
+        <div class="certificate-wrapper">
+            <div id="certificate-container">
+                <div class="name-container">
+                    <span id="cert-name"></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const certName = document.getElementById('cert-name');
+        const btnGenerate = document.getElementById('btnGenerate');
+        const btnDownload = document.getElementById('btnDownload');
+        const certContainer = document.getElementById('certificate-container');
+        const certWrapper = document.querySelector('.certificate-wrapper');
+
+        const MAX_FONT_SIZE = 60;
+        const MIN_FONT_SIZE = 36;
+        const CONTAINER_MAX_WIDTH = 1280;
+
+        function checkInAppBrowser() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isLine = ua.indexOf("Line") > -1;
+            const isFb = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+            
+            if (isLine || isFb) {
+                alert("ระบบตรวจพบว่าคุณเปิดผ่าน LINE หรือ Facebook\n\nกรุณากดปุ่มเมนูมุมขวาบน (จุด 3 จุด) แล้วเลือก 'เปิดด้วยบราว์เซอร์อื่น' (Open in Safari / Chrome) เพื่อความสะดวกในการดาวน์โหลดไฟล์ภาพลงเครื่องครับ");
+                if (isLine && /Android/i.test(ua)) {
+                    window.location.href = window.location.href.indexOf('?') > -1 ? window.location.href + '&openExternalBrowser=1' : window.location.href + '?openExternalBrowser=1';
+                }
+            }
+        }
+        window.addEventListener('DOMContentLoaded', checkInAppBrowser);
+
+        function adjustFontSize() {
+            let currentSize = MAX_FONT_SIZE;
+            certName.style.fontSize = currentSize + 'px';
+
+            while (certName.offsetWidth > CONTAINER_MAX_WIDTH && currentSize > MIN_FONT_SIZE) {
+                currentSize -= 2;
+                certName.style.fontSize = currentSize + 'px';
+            }
+        }
+
+        nameInput.addEventListener('input', () => {
+            certName.textContent = nameInput.value;
+            adjustFontSize();
+        });
+
+        function generateCertificate() {
+            const nameValue = nameInput.value.trim();
+            if (nameValue === "") {
+                alert("กรุณากรอกชื่อและนามสกุลให้เรียบร้อยครับ");
+                nameInput.focus();
+                return false;
+            }
+            certName.textContent = nameValue;
+            adjustFontSize();
+            return true;
+        }
+
+        btnGenerate.addEventListener('click', generateCertificate);
+        nameInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') generateCertificate();
+        });
+
+        btnDownload.addEventListener('click', () => {
+            if (!generateCertificate()) return;
+
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            if (ua.indexOf("Line") > -1 || ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1) {
+                alert("บราว์เซอร์ปัจจุบันไม่รองรับการดาวน์โหลดไฟล์\n\nกรุณาเปิดลิงก์นี้บน Safari หรือ Chrome เพื่อเซฟรูปภาพเกียรติบัตรครับ");
+                return;
+            }
+
+            const originalBtnText = btnDownload.innerText;
+            btnDownload.innerText = "กำลังประมวลผล...";
+            btnDownload.disabled = true;
+
+            const currentTransform = certContainer.style.transform;
+            certContainer.style.transform = 'none';
+
+            html2canvas(certContainer, {
+                scale: 3,
+                useCORS: true,
+                allowTaint: true,
+                logging: false
+            }).then(canvas => {
+                certContainer.style.transform = currentTransform;
+
+                const nameValue = nameInput.value.trim();
+                const fileName = `Certificate-${nameValue}.png`;
+                
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                btnDownload.innerText = originalBtnText;
+                btnDownload.disabled = false;
+            }).catch(err => {
+                console.error("Download Error:", err);
+                certContainer.style.transform = currentTransform;
+                btnDownload.innerText = originalBtnText;
+                btnDownload.disabled = false;
+                alert("เกิดข้อผิดพลาดในการดาวน์โหลด กรุณาลองใหม่อีกครั้ง");
+            });
+        });
+
+        function responsiveScale() {
+            const wrapperWidth = certWrapper.clientWidth; 
+            const targetWidth = 1600;
+            const targetHeight = 1131;
+
+            if (wrapperWidth < targetWidth) {
+                const scale = wrapperWidth / targetWidth;
+                certContainer.style.transform = `scale(${scale})`;
+                certWrapper.style.height = (targetHeight * scale) + 'px';
+            } else {
+                certContainer.style.transform = 'none';
+                certWrapper.style.height = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', responsiveScale);
+        window.addEventListener('DOMContentLoaded', responsiveScale);
+        window.addEventListener('load', responsiveScale);
+    </script>
+</body>
+</html>
